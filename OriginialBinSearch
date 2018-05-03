@@ -1,0 +1,56 @@
+// --- BINARY SEARCH ---
+bool binSearch(int theArray[47], int size, int value)
+{
+	bool found = false;
+	int midPoint;
+	midPoint = (size % 2 == 0) ?  (size / 2) : ((size / 2));
+	int midVal = theArray[midPoint];
+	int newArray[47];
+
+	//Print theArray for testing
+	cout << "------THE ARRAY-------" << endl;
+	cout << "Midpoint " << midPoint << endl;
+	cout << "Size " << size << endl;
+	cout << "Value " << value << endl;
+	cout << "theArray[midPoint] " << theArray[midPoint] << endl;
+	for (int i = 0; i < size; i++)
+	{
+		cout << theArray[i] << endl;
+	}
+	while (!found)
+	{
+		if (value == theArray[midPoint])
+		{
+			cout << "TRUE!!!" << endl;
+			found = true;
+			return true;
+		}
+		else if (value < theArray[midPoint])
+		{
+			for (int i = 0; i < midPoint; i++)
+			{
+				newArray[i] = theArray[i];
+			}
+		}
+		else if (value > theArray[midPoint])
+		{
+			cout << "value is larger than midpoint " << endl;
+			for (int i = midPoint; i < size; i++)
+			{
+				newArray[i - midPoint] = theArray[i+1];
+			}
+		}
+		if (midPoint != 0)
+		{
+			found = binSearch(newArray, midPoint, value);
+		}
+		else
+		{
+			found = false;
+			return false;
+		}
+		
+	}
+
+	return found;
+}// --- END BINARY SEARCH ---
